@@ -19,6 +19,9 @@
                     <input type="submit" name="submit" value="ลบ" class="btn btn-primary"/>    
                 </form>
             </div>
+            <img src="<?php echo base_url($ship['imagePath']) ?>" 
+                 class="card-img-bottom"
+                 alt="">
         </div>
     </div>
     <?php
