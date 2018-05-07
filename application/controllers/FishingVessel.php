@@ -1,9 +1,9 @@
 <?php
 
+defined('BASEPATH') or exit('No direct script access allowed');
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class FishingVessel extends CI_Controller {
+class FishingVessel extends CI_Controller
+{
 
     public function index()
     {
@@ -20,7 +20,7 @@ class FishingVessel extends CI_Controller {
 
     public function all()
     {
-        echo 'Show all vessels...'; 
+        echo 'Show all vessels...';
     }
 
     public function new_vessel()
@@ -38,10 +38,29 @@ class FishingVessel extends CI_Controller {
 
     public function create()
     {
-        $this->load->model('fishingvessel_model');
-        $this->fishingvessel_model->save_new_vessel();
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('vesselName', 'ชื่อเรือ', 'required|max_length[10]', array('required' => 'ช่วยกรอกชื่อสำเภาด้วยนะออเจ้า' ));
 
-        redirect('fishingvessel/');
+        if ($this->form_validation->run() == false) 
+        {
+            $this->load->model('country_model');
+            $result = $this->country_model->get_all();
+
+            $data['country_list'] = $result;
+            $data['title'] = "เพิ่มข้อมูลเรือประมง";
+
+            $this->load->view('header', $data);
+            $this->load->view('fishing-vessel/new-ship', $data);
+            $this->load->view('footer');
+        }
+        else 
+        {
+            $this->load->model('fishingvessel_model');
+            $this->fishingvessel_model->save_new_vessel();
+
+            redirect('fishingvessel/');
+        }
+        
     }
 
     public function new_success()
@@ -49,11 +68,6 @@ class FishingVessel extends CI_Controller {
 
     }
 
-
-
 }
 
 /* End of file FishingVessel.php */
-
-
-?>
