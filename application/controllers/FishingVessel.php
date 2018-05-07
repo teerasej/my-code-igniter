@@ -72,10 +72,10 @@ class FishingVessel extends CI_Controller
 
                 $image_path = 'upload/' . $upload_data['file_name'];
 
-                // $this->load->model('fishingvessel_model');
-                // $this->fishingvessel_model->save_new_vessel();
+                $this->load->model('fishingvessel_model');
+                $this->fishingvessel_model->save_new_vessel($image_path);
 
-                // redirect('fishingvessel/');
+                redirect('fishingvessel/');
             }
             else 
             {
