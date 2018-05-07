@@ -28,6 +28,13 @@ class FishingVessel_model extends CI_Model {
 
         return $this->db->insert('Vessel', $data);
     }
+
+    public function delete_vessel()
+    {
+        $data['id'] = $this->input->post('vesselID');
+
+        return $this->db->delete('Vessel', $data);
+    }
     
     
 
