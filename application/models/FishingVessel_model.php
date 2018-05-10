@@ -38,7 +38,7 @@ class FishingVessel_model extends CI_Model {
         $data['Name'] = $vesselName;
         $data['Country_ID'] = $Country_ID;
 
-        return $this->db->insert($data);
+        return $this->db->insert('Vessel',$data);
     }
 
 
